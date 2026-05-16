@@ -1,3 +1,10 @@
+"""Clean raw event records for the DVC pipeline.
+
+This stage reads the raw event log, removes rows that do not meet the
+assignment's validity rules, and writes a normalized CSV for downstream
+pipeline stages.
+"""
+
 from pathlib import Path
 
 import pandas as pd
@@ -10,6 +17,7 @@ VALID_EVENT_TYPES = {"click", "login", "purchase", "scroll", "view"}
 
 
 def main() -> None:
+    """Create data/clean/events.csv from data/raw/events.csv."""
     df = pd.read_csv(RAW_PATH)
 
     # Drop rows with missing required fields.
@@ -33,6 +41,7 @@ def main() -> None:
     # Keep columns in the original order.
     df = df[["user_id", "timestamp", "event_type", "duration_seconds"]]
 
+    # DVC expects this path to be produced by the clean stage.
     CLEAN_PATH.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(CLEAN_PATH, index=False)
 
