@@ -1,0 +1,13 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# OS and editor junk
+.DS_Store
+.vscode/
+*:Zone.Identifier
+
+# DVC local cache and temp files
+.dvc/cache/
+.dvc/tmp/
