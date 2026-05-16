@@ -1,0 +1,22 @@
+stages:
+  clean:
+    cmd: uv run python src/eventflow/clean.py
+    deps:
+    - data/raw/events.csv
+    - src/eventflow/clean.py
+    outs:
+    - data/clean/events.csv
+  transform:
+    cmd: uv run python src/eventflow/transform.py
+    deps:
+    - data/clean/events.csv
+    - src/eventflow/transform.py
+    outs:
+    - data/transformed/events.csv
+  features:
+    cmd: uv run python src/eventflow/features.py
+    deps:
+    - data/transformed/events.csv
+    - src/eventflow/features.py
+    outs:
+    - data/features/events.csv
