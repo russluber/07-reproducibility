@@ -26,7 +26,8 @@ def _(events, plt):
     ax.set_xlabel("Duration (minutes)")
     ax.set_ylabel("Number of events")
     fig.tight_layout()
-    return (fig,)
+    fig
+    return
 
 
 if __name__ == "__main__":
